@@ -18,7 +18,7 @@
     </div>
     <script src="../../lib/js/vue.min.js"></script>
     <script>
-      let week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      let week = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六","星期日"];
       var app = new Vue({
         el: "#app",
         data: {
@@ -33,7 +33,7 @@
           updateTime() {
             let cd = new Date();
             let zeroPadding = this.zeroPadding;
-            
+
             this.time =
               zeroPadding(cd.getHours(), 2) +
               ":" +
