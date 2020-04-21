@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../lib/css/normalize.css" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="date">
+        {{date}}
+      </div>
+      <div class="time">
+        {{time}}
+      </div>
+    </div>
+    <script src="../../lib/js/vue.min.js"></script>
+    <script>
+      let week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      var app = new Vue({
+        el: "#app",
+        data: {
+          date: "",
+          time: "",
+        },
+        mounted() {
+          let timerId = setInterval(this.updateTime, 1000);
+          this.updateTime();
+        },
+        methods: {
+          updateTime() {
+            let cd = new Date();
+            let zeroPadding = this.zeroPadding;
+            
+            this.time =
+              zeroPadding(cd.getHours(), 2) +
+              ":" +
+              zeroPadding(cd.getMinutes(), 2) +
+              ":" +
+              zeroPadding(cd.getSeconds(), 2);
+
+            this.date =
+              zeroPadding(cd.getFullYear(), 4) +
+              "-" +
+              zeroPadding(cd.getMonth() + 1, 2) +
+              "-" +
+              zeroPadding(cd.getDate(), 2) +
+              "" +
+              week[cd.getDay()];
+          },
+          zeroPadding(num, digit) {
+            let zero;
+            for (var i = 0; i < digit; i++) {
+              zero += "0";
+            }
+            return (zero + num).slice(-digit);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
